@@ -1,34 +1,64 @@
-Fri Aug 20 20:46:35 2021
+Sat Aug 21 18:32:25 2021
 Windows-10-10.0.19041
 Ren'Py 7.4.8.1895
  
 
-Bootstrap to the start of init.init took 0.73s
-Early init took 0.01s
-Loader init took 0.08s
-Loading error handling took 0.07s
-Loading script took 0.41s
-Loading save slot metadata. took 0.02s
+Bootstrap to the start of init.init took 0.06s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.02s
+Loading script took 0.20s
+Loading save slot metadata. took 0.01s
 Loading persistent took 0.00s
 Importing _renpysteam: ImportError('No module named _renpysteam',)
-Running init code took 0.18s
-Loading analysis data took 0.07s
-Analyze and compile ATL took 0.01s
-Index archives took 0.00s
-Dump and make backups. took 0.26s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.05s
+
+Full traceback:
+  File "game/script.rpy", line 73, in script
+    image lo default = ConditionSwitch(
+  File "renpy/ast.py", line 1022, in execute
+    img = renpy.python.py_eval_bytecode(self.code.bytecode)
+  File "renpy/python.py", line 2259, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/script.rpy", line 75, in <module>
+    "isF < 1", "maleLOplaceholder.png"
+  File "renpy/display/layout.py", line 1533, in ConditionSwitch
+    raise Exception('ConditionSwitch takes an even number of arguments')
+Exception: ConditionSwitch takes an even number of arguments
+
+While running game code:
+  File "game/script.rpy", line 73, in script
+    image lo default = ConditionSwitch(
+  File "game/script.rpy", line 75, in <module>
+    "isF < 1", "maleLOplaceholder.png"
+Exception: ConditionSwitch takes an even number of arguments
 DPI scale factor: 1.750000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: "Couldn't load nvlib." (can be ignored)
-Creating interface object took 0.01s
-Cleaning stores took 0.00s
-Init translation took 0.13s
-Build styles took 0.01s
-Load screen analysis took 0.06s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.22s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
+
+Full traceback:
+  File "renpy/bootstrap.py", line 326, in bootstrap
+    renpy.main.main()
+  File "renpy/main.py", line 515, in main
+    renpy.game.context().run(node)
+  File "game/script.rpy", line 73, in script
+    image lo default = ConditionSwitch(
+  File "game/script.rpy", line 73, in script
+    image lo default = ConditionSwitch(
+  File "renpy/ast.py", line 1022, in execute
+    img = renpy.python.py_eval_bytecode(self.code.bytecode)
+  File "renpy/python.py", line 2259, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/script.rpy", line 75, in <module>
+    "isF < 1", "maleLOplaceholder.png"
+  File "renpy/display/layout.py", line 1533, in ConditionSwitch
+    raise Exception('ConditionSwitch takes an even number of arguments')
+Exception: ConditionSwitch takes an even number of arguments
+
+While running game code:
+  File "game/script.rpy", line 73, in script
+    image lo default = ConditionSwitch(
+  File "game/script.rpy", line 73, in script
+    image lo default = ConditionSwitch(
+  File "game/script.rpy", line 75, in <module>
+    "isF < 1", "maleLOplaceholder.png"
+Exception: ConditionSwitch takes an even number of arguments

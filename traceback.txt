@@ -1,0 +1,36 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 73, in script
+    image lo default = ConditionSwitch(
+  File "game/script.rpy", line 73, in script
+    image lo default = ConditionSwitch(
+  File "game/script.rpy", line 75, in <module>
+    "isF < 1", "maleLOplaceholder.png"
+Exception: ConditionSwitch takes an even number of arguments
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "renpy/bootstrap.py", line 326, in bootstrap
+    renpy.main.main()
+  File "renpy/main.py", line 515, in main
+    renpy.game.context().run(node)
+  File "game/script.rpy", line 73, in script
+    image lo default = ConditionSwitch(
+  File "game/script.rpy", line 73, in script
+    image lo default = ConditionSwitch(
+  File "renpy/ast.py", line 1022, in execute
+    img = renpy.python.py_eval_bytecode(self.code.bytecode)
+  File "renpy/python.py", line 2259, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/script.rpy", line 75, in <module>
+    "isF < 1", "maleLOplaceholder.png"
+  File "renpy/display/layout.py", line 1533, in ConditionSwitch
+    raise Exception('ConditionSwitch takes an even number of arguments')
+Exception: ConditionSwitch takes an even number of arguments
+
+Windows-10-10.0.19041
+Ren'Py 7.4.8.1895
+Signs of Love 1.0
+Sat Aug 21 18:32:25 2021
