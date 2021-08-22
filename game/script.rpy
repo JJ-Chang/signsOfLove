@@ -38,25 +38,31 @@ init:
     image sign here:
         "here.png"
         zoom .5
+    image sign yesPlease:
+        "yesPleasePlaceholder.jpg"
+        zoom .5
+    image sign noThanks:
+        "noThanksPlaceholder.png"
+        zoom .5
 
-    image sign now small:
-        "now.png"
-        zoom .3
-    image sign anyone small: #https://www.reddit.com/r/RenPy/comments/iglq6o/playing_gifs_in_renpy/
-        zoom .3
-        "any1.png"
-        0.5
-        "any2.png"
-        0.5
-        "one.png"
-        0.5
-        repeat
-    image sign sit small:
-        "sit.png"
-        zoom  .3
-    image sign here small:
-        "here.png"
-        zoom .3
+#     image sign now small:
+#         "now.png"
+#         zoom .3
+#     image sign anyone small: #https://www.reddit.com/r/RenPy/comments/iglq6o/playing_gifs_in_renpy/
+#         zoom .3
+#         "any1.png"
+#         0.5
+#         "any2.png"
+#         0.5
+#         "one.png"
+#         0.5
+#         repeat
+#     image sign sit small:
+#         "sit.png"
+#         zoom  .3
+#     image sign here small:
+#         "here.png"
+#         zoom .3
 
 #define styles
 style slButton_left_top is image: #https://www.renpy.org/doc/html/style.html
@@ -279,6 +285,17 @@ label start: # The game starts here.
         lo "Not quite. Try again!"
         jump slAnswer1
 
+    with None #https://www.renpy.org/doc/html/displaying_images.html#with-statement
+    hide loPic
+    hide sign
+    with fade
+    "The instructor walks into the class, and you stop leaning in the aisle and return to your desk."
+    "You pay close attention during the class, but there’s too much new information all at once."
+    "All you manage to remember is two signs."
+    show sign yesPlease at truecenter
+    "Yes please"
+    show sign noThanks at truecenter
+    "No thanks"
 
 return #game end
 
