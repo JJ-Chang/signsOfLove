@@ -1,36 +1,53 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/script.rpy", line 73, in script
-    image lo default = ConditionSwitch(
-  File "game/script.rpy", line 73, in script
-    image lo default = ConditionSwitch(
-  File "game/script.rpy", line 75, in <module>
-    "isF < 1", "maleLOplaceholder.png"
-Exception: ConditionSwitch takes an even number of arguments
+Compiling ATL code at game/script.rpy:20
+  File "game/script.rpy", line 56, in script
+    menu select_lo: #https://www.renpy.org/wiki/renpy/doc/cookbook/Letting_players_choose_their_own_name
+NameError: name 'charZoom' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/bootstrap.py", line 326, in bootstrap
-    renpy.main.main()
-  File "renpy/main.py", line 515, in main
-    renpy.game.context().run(node)
-  File "game/script.rpy", line 73, in script
-    image lo default = ConditionSwitch(
-  File "game/script.rpy", line 73, in script
-    image lo default = ConditionSwitch(
-  File "renpy/ast.py", line 1022, in execute
-    img = renpy.python.py_eval_bytecode(self.code.bytecode)
-  File "renpy/python.py", line 2259, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 75, in <module>
-    "isF < 1", "maleLOplaceholder.png"
-  File "renpy/display/layout.py", line 1533, in ConditionSwitch
-    raise Exception('ConditionSwitch takes an even number of arguments')
-Exception: ConditionSwitch takes an even number of arguments
+  File "game/script.rpy", line 56, in script
+    menu select_lo: #https://www.renpy.org/wiki/renpy/doc/cookbook/Letting_players_choose_their_own_name
+  File "renpy/ast.py", line 1683, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "renpy/exports.py", line 1062, in menu
+    rv = renpy.store.menu(new_items)
+  File "renpy/exports.py", line 1298, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 3276, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "renpy/display/core.py", line 3694, in interact_core
+    root_widget.visit_all(lambda i : i.per_interact())
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 568, in visit_all
+    d.visit_all(callback, seen)
+  File "renpy/display/core.py", line 558, in visit_all
+    for d in self.visit():
+  File "renpy/atl.py", line 603, in visit
+    block = self.compile()
+  File "renpy/atl.py", line 510, in compile
+    block = self.atl.compile(self.context)
+  File "renpy/atl.py", line 705, in compile
+    statements = [ i.compile(ctx) for i in self.statements ]
+  File "renpy/atl.py", line 953, in compile
+    value = ctx.eval(expr)
+  File "renpy/atl.py", line 260, in eval
+    return eval(expr, renpy.store.__dict__, self.context) # @UndefinedVariable
+  File "<string>", line 1, in <module>
+NameError: name 'charZoom' is not defined
 
 Windows-10-10.0.19041
 Ren'Py 7.4.8.1895
 Signs of Love 1.0
-Sat Aug 21 18:32:25 2021
+Sat Aug 21 22:09:36 2021

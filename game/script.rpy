@@ -1,30 +1,45 @@
 ﻿# The script of the game goes in this file.
 
 #characters
-define mc = Character("You", color="#c35e77") #pink
-define lo = Character("name", color="#c6d7c8") #green
+define mc = DynamicCharacter("mcName", color="#c35e77", outlinecolor="white") #pink https://www.renpy.org/wiki/renpy/doc/cookbook/Who's_that%3F
+define lo = DynamicCharacter("loName", color="#c6d7c8", outlinecolor="black")
+$ mcName = "You"
+$ lo = "???"
 
 #background images
 image classroom = "classroomPlaceholder.jpg"
 
 #character images
-image hui default = "maleLOplaceholder.png"
-image connie default = "femaleLOplaceholder.png"
+init: #https://lemmasoft.renai.us/forums/viewtopic.php?t=9185
+    image hui default:
+        "huilook.png"
+        zoom .35
+    image connie default:
+     "connielook.png"
+     zoom .35
 
+#sign language images
+init:
+    image sign now:
+        "now.png"
+        zoom .5
+    image sign anyone: #https://www.reddit.com/r/RenPy/comments/iglq6o/playing_gifs_in_renpy/
+        zoom .5
+        "any1.png"
+        0.5
+        "any2.png"
+        0.5
+        "one.png"
+        0.5
+        repeat
+    image sign sit:
+        "sit.png"
+        zoom  .5
+    image sign here:
+        "here.png"
+        zoom .5
 
 label start: # The game starts here.
-    label the_beginning:
-        "test start"
-        menu:
-           "Keep going":
-                jump the_beginning
-           "The end!":
-                jump the_end
-
-    label the_end:
-        "You did it! You made it to the end!"
-        "Congratulations!"
-
     scene classroom
     "You sigh as you walk into the classroom."
     "You never expected you would be attending a nighttime sign language class, but after the car accident that caused you to lose your hearing, you don’t have much of a choice."
@@ -32,27 +47,25 @@ label start: # The game starts here.
     "You’re open to meeting new people, but you won’t go out of your way to make friends here. You just want to learn enough to get on with your life."
     "Out of the corner of your eye, you see..."
 
-    #select LO
+    #select LO https://www.renpy.org/doc/html/displaying_images.html
     show hui default at left
     show connie default at right
 
-    menu select_lo:
+    menu select_lo: #https://www.renpy.org/wiki/renpy/doc/cookbook/Letting_players_choose_their_own_name
         "a girl":
             jump girl
         "a boy":
             jump boy
-    #implement image map if there's time, to click on the actual images of the LOs
-    #     screen selectLO_imagemap:
-    #         imagemap:
-    #             hotspot() #maleLO
-    #             hotspot() #femaleLO
-
     label boy:
         scene classroom
-        $ gender = "boy"
+        $ gender = "boy" #one line python https://www.renpy.org/doc/html/python.html
         $ pronoun0 ="him"
+        $ pronoun0cap = "Him"
         $ pronoun1 ="he"
+        $ pronoun1cap = "He"
         $ pronoun2 ="his"
+        $ pronoun2cap = "His"
+        $ loName = "Hui"
 
         jump after_select_lo
 
@@ -60,27 +73,86 @@ label start: # The game starts here.
         scene classroom
         $ gender ="girl"
         $ pronoun0 ="her"
+        $ pronoun0cap = "Her"
         $ pronoun1 ="she"
+        $ pronoun1cap = "She"
         $ pronoun2 ="her"
+        $ pronoun2cap = "Her"
+        $ loName = "Connie"
 
         jump after_select_lo
 
     label after_select_lo:
-        if $ gender == "girl":
-            $ isF = 2
-        else:
-            $ isF = 0
-        image lo default = ConditionSwitch(
-            "isF > 1", "femaleLOplaceholder.png"
-            "isF < 1", "maleLOplaceholder.png"
-        )
-        show lo default at center
+        init:
+            image loPic default:
+                ConditionSwitch(
+                "gender == 'girl'", "connielook.png" ,
+                "gender == 'boy'", "huilook.png") #https://lemmasoft.renai.us/forums/viewtopic.php?t=23402
+                zoom .35
+        init:
+            image loPic smile:
+                ConditionSwitch(
+                "gender == 'girl'", "conniesmile.png" ,
+                "gender == 'boy'", "huismile.png") #https://lemmasoft.renai.us/forums/viewtopic.php?t=23402
+                zoom .35
+        init:
+            image loPic talk:
+                ConditionSwitch(
+                "gender == 'girl'", "connietalk.png" ,
+                "gender == 'boy'", "huitalk.png") #https://lemmasoft.renai.us/forums/viewtopic.php?t=23402
+                zoom .35
 
-    "you see a %(gender)s come stand behind the desk beside you. You turn to face %(pronoun0)s."
-    "%(pronoun1)s smiles radiantly down at you, and %(pronoun1)s moves %(pronoun2)s hands in a series of patterns."
+    show loPic default at center with dissolve
+    "You see a %(gender)s come stand behind the desk beside you. You turn to face %(pronoun0)s."
+    show loPic smile
+    "%(pronoun1cap)s smiles radiantly down at you, and %(pronoun1)s moves %(pronoun2)s hands in a series of patterns."
     "You pause for a second, confused, before pursing your eyebrows and tilting your head."
+    show loPic default
+    "Understanding flashes across %(pronoun2)s face, and %(pronoun1)s reaches into %(pronoun2)s bag and grabs %(pronoun2)s phone, opening the notes app."
+    "You peer at the screen."
+    show loPic talk
+    lo "Is this seat taken?"
+    show loPic smile
+    "You shake your head. The %(gender)s smiles and plonks down at the desk beside you."
+    "%(pronoun1cap)s turns back to %(pronoun2)s phone."
+    show loPic talk
+    lo "I'm [loName!s]. You?" #https://www.renpy.org/doc/html/text.html
+    "[pronoun1cap!s] hands you [pronoun2!s] phone."
 
-#define mc = Character("You", color="#c35e77") #pink for now
-#define lo = Character("Connie", color="#5e9ca5") #turquoise for now
+    $ mcName = renpy.input("Enter your name") #https://www.renpy.org/wiki/renpy/doc/cookbook/Letting_players_choose_their_own_name
+    $ mcName.strip()
+    if mcName == "":
+        $mcName = "Jay"
+    lo "Nice to meet you, [mcName!s]!"
+    "[loName!s] puts out [pronoun2!s] hand to shake. You take it and a smile ghosts across your lips."
+    hide loPic with dissolve
+    "(Maybe it won't be so bad here after all.)"
+    "Suddenly, a thought crosses your mind."
+    show loPic default with dissolve
+    "You fish out your phone as well, and exchange numbers with [loName!s]."
+    "You open a new text conversation."
+    mc "What were those signs you used?"
+    show loPic talk
+    lo "I was asking if anyone was sitting here."
+    #lo "{image=now}{alt}now sign{/alt}{image=anyone}{alt}anyone sign{/alt}{image=sit}{alt}sit sign{/alt}{image=here}{alt}here sign{/alt}\nNow anyone sit here" #https://www.renpy.org/doc/html/text.html#text-tag-image
+
+    show loPic talk at left
+    show sign now at truecenter #https://www.renpy.org/doc/html/transforms.html#creator-defined-transforms
+    lo "Now"
+    show sign anyone at truecenter
+    lo "anyone"
+    show sign sit at truecenter
+    lo "sit"
+    show sign here at truecenter
+    lo "here."
+    hide sign
+
+    lo "There's no 'ing' words in sign language, so you indicate tense by adding 'now' to the beginning of your sentence."
+    lo "You wanna try?"
 
     return #game end
+
+#imagemaps: https://lemmasoft.renai.us/forums/viewtopic.php?f=51&t=9812
+#image transforms: https://www.renpy.org/doc/html/transforms.html#creator-defined-transforms
+#transform properties: https://www.renpy.org/doc/html/atl.html#transform-properties
+#transition: https://www.renpy.org/doc/html/transitions.html

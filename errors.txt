@@ -2,10 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 75: invalid syntax
-                isF, "maleLOplaceholder.png"\
-                   ^
-    
+File "game/script.rpy", line 139: end of line expected.
+    show sign now at truecenter right 
+                                ^
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Sat Aug 21 18:27:04 2021
+Sat Aug 21 22:01:05 2021
