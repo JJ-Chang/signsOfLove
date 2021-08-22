@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 342: is not terminated with a newline. (Check strings and parenthesis.)
+File "game/script.rpy", line 178: is not terminated with a newline. (Check strings and parenthesis.)
 (Perhaps you left out a " at the end of the first line.)
-        "
+        "and %(pronoun1)s reaches into %(pronoun2)s bag and grabs %(pronoun2)s phone, opening the notes app.""
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Sun Aug 22 04:59:04 2021
+Sun Aug 22 06:37:26 2021

@@ -1,36 +1,80 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "renpy/common/00keymap.rpy", line 469, in script
-    python hide:
-  File "renpy/common/00keymap.rpy", line 469, in <module>
-    python hide:
-  File "renpy/common/00keymap.rpy", line 488, in _execute_python_hide
-    renpy.save("_reload-1", "reload save game")
-AttributeError: 'NoneType' object has no attribute 'stores'
+While loading <'Image' u'gui/textbox.png'>:
+  File "game/script.rpy", line 457, in script
+    mc "Besides that though… I did some studying on my own, and… I wanted to surprise you."
+  File "game/script.rpy", line 457, in script
+    mc "Besides that though… I did some studying on my own, and… I wanted to surprise you."
+IOError: Couldn't find file 'gui/textbox.png'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "renpy/common/00keymap.rpy", line 469, in script
-    python hide:
-  File "renpy/ast.py", line 923, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "renpy/python.py", line 2235, in py_exec_bytecode
-    exec(bytecode, globals, locals)
-  File "renpy/common/00keymap.rpy", line 469, in <module>
-    python hide:
-  File "renpy/common/00keymap.rpy", line 488, in _execute_python_hide
-    renpy.save("_reload-1", "reload save game")
-  File "renpy/loadsave.py", line 394, in save
-    roots = renpy.game.log.freeze(None)
-  File "renpy/python.py", line 2132, in freeze
-    self.complete(False)
-  File "renpy/python.py", line 1726, in complete
-    self.current.stores[name], self.current.delta_ebc[name] = sd.get_changes(begin)
-AttributeError: 'NoneType' object has no attribute 'stores'
+  File "renpy/bootstrap.py", line 326, in bootstrap
+    renpy.main.main()
+  File "renpy/main.py", line 617, in main
+    run(restart)
+  File "renpy/main.py", line 148, in run
+    renpy.execution.run_context(True)
+  File "renpy/execution.py", line 922, in run_context
+    context.run()
+  File "game/script.rpy", line 457, in script
+    mc "Besides that though… I did some studying on my own, and… I wanted to surprise you."
+  File "game/script.rpy", line 457, in script
+    mc "Besides that though… I did some studying on my own, and… I wanted to surprise you."
+  File "renpy/ast.py", line 716, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "renpy/exports.py", line 1417, in say
+    who(what, *args, **kwargs)
+  File "renpy/character.py", line 1223, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "renpy/character.py", line 875, in do_display
+    **display_args)
+  File "renpy/character.py", line 621, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 3276, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "renpy/display/core.py", line 3793, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "renpy/display/core.py", line 2521, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 814, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 814, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 814, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/screen.py", line 681, in render
+    child = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 814, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 1267, in render
+    back = render(style.background, bw, bh, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/im.py", line 607, in render
+    return cache.get(self, render=True)
+  File "renpy/display/im.py", line 271, in get
+    surf = image.load()
+  File "renpy/display/im.py", line 688, in load
+    raise e
+IOError: Couldn't find file 'gui/textbox.png'.
 
 Windows-10-10.0.19041
 Ren'Py 7.4.8.1895
 Signs of Love 1.0
-Sun Aug 22 04:50:49 2021
+Sun Aug 22 06:44:53 2021

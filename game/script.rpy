@@ -1,16 +1,16 @@
 ﻿# The script of the game goes in this file.
 
 #characters
-define mc = DynamicCharacter("mcName", color="#c35e77", outlinecolor="white") #pink https://www.renpy.org/wiki/renpy/doc/cookbook/Who's_that%3F
+define mc = DynamicCharacter("mcName", color="#59959e", outlinecolor="white") #pink https://www.renpy.org/wiki/renpy/doc/cookbook/Who's_that%3F
 define lo = DynamicCharacter("loName", color="#2D4C2B", outlinecolor="black")
 $ mcName = "You"
 $ lo = "???"
 
 #background images
-image classroom = "classroomPlaceholder.jpg"
-image outside = "skyPlaceholder.jpeg"
-image roof = "roofPlaceholder.jpeg"
-
+image classroom = "bgclass.png"
+image outside = "bgnight.png"
+image roof = "bgrailing.png"
+image endScreen = "Signs of Love.jpeg"
 #character images
 init: #https://lemmasoft.renai.us/forums/viewtopic.php?t=9185
     image hui default:
@@ -57,11 +57,36 @@ init:
         0.5
         repeat
     image sign pretty:
-        "prettyPlaceholder.jpg"
         zoom .5
+        "pretty1.png"
+        0.5
+        "pretty2.png"
+        0.5
+        repeat
     image sign both:
-        "bothPlaceholder.png"
         zoom .5
+        "both1.png"
+        0.5
+        "both2.png"
+        0.5
+        repeat
+    image sign pretty small:
+        zoom .3
+        "pretty1.png"
+        0.5
+        "pretty2.png"
+        0.5
+        repeat
+    image sign both small:
+        zoom .3
+        "both1.png"
+        0.5
+        "both2.png"
+        0.5
+        repeat
+    image sign ily:
+        "ily.png"
+        zoom .8
 
 #define styles
 # style slButton_left_top is image: #https://www.renpy.org/doc/html/style.html
@@ -78,11 +103,14 @@ init:
 #     yanchor 710
 
 label start: # The game starts here.
+    play music "audio/bensound-onceagain.mp3" fadein 1.0
     scene classroom
     "You sigh as you walk into the classroom."
-    "You never expected you would be attending a nighttime sign language class, but after the car accident that caused you to lose your hearing, you don’t have much of a choice."
+    "You never expected you would be attending a nighttime sign language class,"
+    "but after the car accident that caused you to lose your hearing, you don’t have much of a choice."
     "You look around for empty seats, and settle on a desk in the back of the room."
-    "You’re open to meeting new people, but you won’t go out of your way to make friends here. You just want to learn enough to get on with your life."
+    "You’re open to meeting new people, but you won’t go out of your way to make friends here."
+    "You just want to learn enough to get on with your life."
     "Out of the corner of your eye, you see..."
 
     #select LO https://www.renpy.org/doc/html/displaying_images.html
@@ -146,7 +174,8 @@ label start: # The game starts here.
     "%(pronoun1cap)s smiles radiantly down at you, and %(pronoun1)s moves %(pronoun2)s hands in a series of patterns."
     "You pause for a second, confused, before pursing your eyebrows and tilting your head."
     show loPic default
-    "Understanding flashes across %(pronoun2)s face, and %(pronoun1)s reaches into %(pronoun2)s bag and grabs %(pronoun2)s phone, opening the notes app."
+    "Understanding flashes across %(pronoun2)s face,"
+    "and %(pronoun1)s reaches into %(pronoun2)s bag and grabs %(pronoun2)s phone, opening the notes app."
     "You peer at the screen."
     show loPic talk
     lo "Is this seat taken?"
@@ -184,11 +213,12 @@ label start: # The game starts here.
     lo "here."
     hide sign
 
+    show loPic talk at center
     lo "There's no 'ing' words in sign language, so you indicate tense by adding 'now' to the beginning of your sentence."
     lo "You wanna try?"
 
     label slAnswer1: #would be better not to hardcode this but no time asdlfkjasdls
-        show loPic default
+        show loPic default at left
         $ score = ""
         #would randomize if had more time
         show sign sit at truecenter
@@ -232,6 +262,7 @@ label start: # The game starts here.
     "You were wrong. It’s just as bad as you thought it would be."
     "You let out a loud groan."
     mc "This is hopeless."
+    play music "audio/bensound-acousticbreeze.mp3" fadeout 1.0 fadein 3.0
     show loPic default at center
     "You feel a tap on your shoulder, and [loName!s] is there, pointing at [pronoun2!s] phone."
     lo "Want some snacks?"
@@ -264,7 +295,8 @@ label start: # The game starts here.
     mc "It's just..."
     "You sigh."
     mc "Sign language is really hard."
-    mc "I'm not any good at remembering all the different hand signs, and it's so different from any language I've learned before."
+    mc "I'm not any good at remembering all the different hand signs,"
+    mc "and it's so different from any language I've learned before."
     show loPic smile
     "[loName!s] smiles kindly."
     show loPic default
@@ -272,7 +304,8 @@ label start: # The game starts here.
     show loPic talk
     lo "Don’t be too hard on yourself, [mcName!s]."
     lo "It’s only your first day, you’ll definitely improve with time."
-    lo "Soon you’ll be good enough to have full conversations with just your hands - and I don’t mean by typing on a phone like we are now."
+    lo "Soon you’ll be good enough to have full conversations with just your hands -"
+    lo "and I don’t mean by typing on a phone like we are now."
     lo "How bout this?"
     lo "I’ll help you."
     lo "I’ll walk with you to the station, and we can meet before class on the roof every day."
@@ -284,6 +317,7 @@ label start: # The game starts here.
     "[loName!s] takes your hand and pulls you out of the room excitedly."
 
     scene outside with fade
+    play music "audio/bensound-adaytoremember.mp3" fadein 1.0 fadeout 1.0
     "The two of you exit the school, and you’re left holding hands, staring up at the starry night sky."
     show loPic talk with dissolve
     "[loName!s] tugs your sleeve and signs with one hand."
@@ -314,24 +348,24 @@ label start: # The game starts here.
     "You started it, but you can’t help but blush."
     "You quickly turn to your phone to hide your reddening cheeks."
     label slAnswer2:
-        hide loPic with dissolve
         mc "I remembered those signs!{nw}" #https://www.renpy.org/doc/html/text.html#text-displayables
         mc "I remembered those signs!{fast} Pretty,"
+        hide loPic with dissolve
         menu:
-            "{image=sign both}":
+            "{image=sign both small}":
                 $ answer = "0"
-            "{image=sign pretty}":
+            "{image=sign pretty small}":
                 $answer = "1"
         "and both!"
         menu:
-            "{image=sign both}":
+            "{image=sign both small}":
                 $ answer = answer + "1"
-            "{image=sign pretty}":
+            "{image=sign pretty small}":
                 $answer = answer + "0"
-        show loPic talk
+        show loPic talk with dissolve
 
     if answer=="11":
-        lo "You did! See, you'll pick it up in no time."
+        lo "You did! See, you'll be signing fluently in no time."
     else:
         lo "Not quite. But that's ok! Just keep trying your best and you'll get it soon."
         jump slAnswer2
@@ -421,6 +455,17 @@ label start: # The game starts here.
 
     show loPic default
     mc "Besides that though… I did some studying on my own, and… I wanted to surprise you."
+    "You put your phone down, and look into [loName!s]'s eyes shyly."
+    "[loName!s] watches you intensely, waiting to see what you’ll do."
+    "You take a deep breath, then lift your hand and sign,"
+    with None
+    hide loPic
+    show sign ily at truecenter
+    with dissolve
+    mc "I love you."
+
+    scene endScreen with fade
+    $ renpy.pause() #https://lemmasoft.renai.us/forums/viewtopic.php?t=14865
 
 return #game end
 
