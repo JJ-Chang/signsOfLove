@@ -1,14 +1,14 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While loading <'Image' u'noThanksPlaceholder.png'>:
-  File "game/script.rpy", line 298, in script
+  File "game/script.rpy", line 211, in script
     "No thanks"
 IOError: Couldn't find file 'noThanksPlaceholder.png'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 298, in script
+  File "game/script.rpy", line 211, in script
     "No thanks"
   File "renpy/ast.py", line 716, in execute
     renpy.exports.say(who, what, *args, **kwargs)
@@ -67,4 +67,4 @@ IOError: Couldn't find file 'noThanksPlaceholder.png'.
 Windows-10-10.0.19041
 Ren'Py 7.4.8.1895
 Signs of Love 1.0
-Sun Aug 22 03:20:20 2021
+Sun Aug 22 03:21:31 2021

@@ -45,25 +45,6 @@ init:
         "noThanksPlaceholder.png"
         zoom .5
 
-#     image sign now small:
-#         "now.png"
-#         zoom .3
-#     image sign anyone small: #https://www.reddit.com/r/RenPy/comments/iglq6o/playing_gifs_in_renpy/
-#         zoom .3
-#         "any1.png"
-#         0.5
-#         "any2.png"
-#         0.5
-#         "one.png"
-#         0.5
-#         repeat
-#     image sign sit small:
-#         "sit.png"
-#         zoom  .3
-#     image sign here small:
-#         "here.png"
-#         zoom .3
-
 #define styles
 style slButton_left_top is image: #https://www.renpy.org/doc/html/style.html
     xanchor 600 #https://www.renpy.org/doc/html/style_properties.html
@@ -173,7 +154,6 @@ label start: # The game starts here.
     mc "What were those signs you used?"
     show loPic talk
     lo "I was asking if anyone was sitting here."
-    #lo "{image=now}{alt}now sign{/alt}{image=anyone}{alt}anyone sign{/alt}{image=sit}{alt}sit sign{/alt}{image=here}{alt}here sign{/alt}\nNow anyone sit here" #https://www.renpy.org/doc/html/text.html#text-tag-image
 
     show loPic talk at left
     show sign now at truecenter #https://www.renpy.org/doc/html/transforms.html#creator-defined-transforms
@@ -189,74 +169,7 @@ label start: # The game starts here.
     lo "There's no 'ing' words in sign language, so you indicate tense by adding 'now' to the beginning of your sentence."
     lo "You wanna try?"
 
-#     menu sl1: #https://lemmasoft.renai.us/forums/viewtopic.php?t=36963
-#         "{image=nowSmall}": #https://lemmasoft.renai.us/forums/viewtopic.php?f=8&t=26705
-#             $ selection += "Now"
-#         "{image=anyone}":
-#             $ selection += "Anyone"
-#         "{image=sit}":
-#             $ selection += "Sit"
-#         "{image=here}":
-#             $ selection += "Here"
-#     menu sl1:
-#         " (sign now small)":
-#             $ selection += "Now"
-#         " (sign anyone small)":
-#             $ selection += "Selection"
-#         " (sign sit small)":
-#             $ selection += "Sit"
-#         " (sign here small)":
-#             $ selection += "Here"
-#     label slSelect0:
-#         call screen slImageMap0
-#
-#         show sign anyone style slButton_left_top
-#         show sign here style slButton_right_top
-#         show sign sit style slButton_left_bottom
-#         show sign now style slButton_right_bottom
-#
-#         $ result = _return
-#         if result == "now":
-#             $ selection += "Now"
-#         elif result == "anyone":
-#             $ selection += "Anyone"
-#         elif result == "sit":
-#             $ selection += "Sit"
-#         elif result == "here":
-#             $ selection += "Here"
     label slAnswer1: #would be better not to hardcode this but no time asdlfkjasdls
-#         python: #https://lemmasoft.renai.us/forums/viewtopic.php?t=40012
-#             for r in [3, 2, 1, 4]: #https://lemmasoft.renai.us/forums/viewtopic.php?t=21196
-#                 if r == 1:
-#                     renpy.show("sign now") #should remember truecenter placement
-#                 elif r == 2:
-#                     renpy.show("sign anyone")
-#                 elif r == 3:
-#                     renpy.show("sign sit")
-#                 elif r == 4:
-#                     renpy.show("sign here")
-#
-#                 answer = renpy.input("Enter the word")
-#                 if r == 1:
-#                     if answer.lower == "now": #https://stackoverflow.com/questions/319426/how-do-i-do-a-case-insensitive-string-comparison
-#                         score += "1"
-#                     else:
-#                         score += "0"
-#                 elif r == 2:
-#                     if answer.lower == "anyone":
-#                         score += "1"
-#                     else:
-#                         score += "0"
-#                 elif r == 3:
-#                     if answer.lower == "sit":
-#                         score += "1"
-#                     else:
-#                         score += "0"
-#                 elif r == 4:
-#                     if answer.lower == "here":
-#                         score += "1"
-#                     else:
-#                         score += "0"
         show loPic default
         $ score = ""
         #would randomize if had more time
@@ -298,31 +211,6 @@ label start: # The game starts here.
     "No thanks"
 
 return #game end
-
-# screen choice(items): #https://lemmasoft.renai.us/forums/viewtopic.php?f=8&t=31059&start=0
-#     window:
-#         style "menu_window"
-#         xalign 0.5
-#         yalign 0.5
-#
-#         vbox:
-#             style "menu_vbox"
-#             spacing 2
-#
-#             for caption, action, chosen in items:
-#                 if action:
-#                     $ finder = caption[caption.find("(")+1:caption.find(")")]
-#                     $ caption = caption.replace(" (%s)" % finder, "")
-#                     button:
-#                        action action
-#                        style "menu_choice_button"
-#                        has hbox
-#                        if finder:
-#                            add "%s" % finder
-#                            null width 10    # some space between the image and the text
-#                        text caption style "menu_choice"
-#                 else:
-#                     text caption style "menu_caption"
 
 #transform properties: https://www.renpy.org/doc/html/atl.html#transform-properties
 #transition: https://www.renpy.org/doc/html/transitions.html
