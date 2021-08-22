@@ -2,14 +2,14 @@
 
 #characters
 define mc = DynamicCharacter("mcName", color="#c35e77", outlinecolor="white") #pink https://www.renpy.org/wiki/renpy/doc/cookbook/Who's_that%3F
-define lo = DynamicCharacter("loName", color="#c6d7c8", outlinecolor="black")
+define lo = DynamicCharacter("loName", color="#2D4C2B", outlinecolor="black")
 $ mcName = "You"
 $ lo = "???"
 
 #background images
 image classroom = "classroomPlaceholder.jpg"
 image outside = "skyPlaceholder.jpeg"
-image roof = "roofPlaceholder.jpg"
+image roof = "roofPlaceholder.jpeg"
 
 #character images
 init: #https://lemmasoft.renai.us/forums/viewtopic.php?t=9185
@@ -362,11 +362,11 @@ label start: # The game starts here.
     mc "I sure do!"
 
     label slAnswer3:
-        show loPic talk at left
         lo "Alright, I'll test you then!"
-        $ score = 0
+        show loPic default at left
 
-        show sign yesPlease
+        $ score = 0
+        show sign yesPlease at truecenter
         $ answer = renpy.input("Enter the word")
         if answer == "yes please":
             $ score = score + 1
@@ -399,21 +399,28 @@ label start: # The game starts here.
         if answer == "no thanks":
             $ score = score + 1
 
-    with None
     hide sign
-    show loPic talk at center
-    with dissolve
     if score == 8:
+        show loPic smile at center with dissolve
         lo "Whoo! Awesome job!"
+        lo "You remembered all of them!"
     elif score > 5:
+        show loPic talk at center with dissolve
         lo "You only missed a few. Don't worry, you've got this!"
         jump slAnswer3
     elif score > 1:
+        show loPic talk at center with dissolve
         lo "You missed some of them. You'll get it soon, I believe in you!"
         jump slAnswer3
     else:
-        lo "Ah. You got all them wrong. That's ok! I'll help you practice."
+        show loPic default at center with dissolve
+        lo "Ah. You got all them wrong."
+        show loPic talk
+        lo "But that's ok! I'll help you practice."
         jump slAnswer3
+
+    show loPic default
+    mc "Besides that though… I did some studying on my own, and… I wanted to surprise you."
 
 return #game end
 
