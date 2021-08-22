@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 258: Line is indented, but the preceding one-line python statement statement does not expect a block. Please check this line's indentation.
-    $ score = score + "1"
-    ^
+File "game/script.rpy", line 342: is not terminated with a newline. (Check strings and parenthesis.)
+(Perhaps you left out a " at the end of the first line.)
+        "
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Sun Aug 22 02:49:12 2021
+Sun Aug 22 04:59:04 2021

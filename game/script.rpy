@@ -8,6 +8,8 @@ $ lo = "???"
 
 #background images
 image classroom = "classroomPlaceholder.jpg"
+image outside = "skyPlaceholder.jpeg"
+image roof = "roofPlaceholder.jpg"
 
 #character images
 init: #https://lemmasoft.renai.us/forums/viewtopic.php?t=9185
@@ -39,25 +41,41 @@ init:
         "here.png"
         zoom .5
     image sign yesPlease:
-        "yesPleasePlaceholder.jpg"
         zoom .5
+        "yesplease(1).png"
+        0.5
+        "yesplease(2).png"
+        0.5
+        repeat
     image sign noThanks:
-        "noThanksPlaceholder.png"
+        zoom .5
+        "nothanks(1).png"
+        0.5
+        "nothanks(2).png"
+        0.5
+        "nothanks(3).png"
+        0.5
+        repeat
+    image sign pretty:
+        "prettyPlaceholder.jpg"
+        zoom .5
+    image sign both:
+        "bothPlaceholder.png"
         zoom .5
 
 #define styles
-style slButton_left_top is image: #https://www.renpy.org/doc/html/style.html
-    xanchor 600 #https://www.renpy.org/doc/html/style_properties.html
-    yanchor 360
-style slButton_right_top is image:
-    xanchor 860
-    yanchor 360
-style slButton_left_bottom is image:
-    xanchor 600
-    yanchor 710
-style slButton_right_bottom is image:
-    xanchor 860
-    yanchor 710
+# style slButton_left_top is image: #https://www.renpy.org/doc/html/style.html
+#     xanchor 600 #https://www.renpy.org/doc/html/style_properties.html
+#     yanchor 360
+# style slButton_right_top is image:
+#     xanchor 860
+#     yanchor 360
+# style slButton_left_bottom is image:
+#     xanchor 600
+#     yanchor 710
+# style slButton_right_bottom is image:
+#     xanchor 860
+#     yanchor 710
 
 label start: # The game starts here.
     scene classroom
@@ -205,10 +223,197 @@ label start: # The game starts here.
     "The instructor walks into the class, and you stop leaning in the aisle and return to your desk."
     "You pay close attention during the class, but there’s too much new information all at once."
     "All you manage to remember is two signs."
-    show sign yesPlease at truecenter
-    "Yes please"
-    show sign noThanks at truecenter
-    "No thanks"
+    show sign yesPlease at truecenter with dissolve
+    "Yes please,"
+    show sign noThanks at truecenter with dissolve
+    "and no thanks."
+    hide sign with dissolve
+    "The instructor finishes the class and you let out a huge sigh, dropping your head into your arms on your desk."
+    "You were wrong. It’s just as bad as you thought it would be."
+    "You let out a loud groan."
+    mc "This is hopeless."
+    show loPic default at center
+    "You feel a tap on your shoulder, and [loName!s] is there, pointing at [pronoun2!s] phone."
+    lo "Want some snacks?"
+
+    menu snacks:
+        "{image=sign yesPlease}":
+            jump yes_snacks
+        "{image=sign noThanks}":
+            jump no_snacks
+
+    label yes_snacks:
+        show loPic smile
+        lo "Here you go!"
+        "[loName!s] hands you some chips."
+        jump after_snacks
+
+    label no_snacks:
+        show loPic talk
+        lo "Aw, ok."
+        "[loName!s] looks a bit disappointed."
+        jump after_snacks
+
+    label after_snacks:
+        show loPic default
+        "[loName!s] takes [pronoun2!s] chair and drags it over to your desk."
+        "[pronoun1cap!s] drapes [pronoun2!s] legs over the sides, resting [pronoun2!s] chin on the back of the chair to peer up at you."
+    show loPic talk
+    lo "What's bugging you?"
+    show loPic default
+    mc "It's just..."
+    "You sigh."
+    mc "Sign language is really hard."
+    mc "I'm not any good at remembering all the different hand signs, and it's so different from any language I've learned before."
+    show loPic smile
+    "[loName!s] smiles kindly."
+    show loPic default
+    "[pronoun1cap!s] places a reassuring hand on your arm."
+    show loPic talk
+    lo "Don’t be too hard on yourself, [mcName!s]."
+    lo "It’s only your first day, you’ll definitely improve with time."
+    lo "Soon you’ll be good enough to have full conversations with just your hands - and I don’t mean by typing on a phone like we are now."
+    lo "How bout this?"
+    lo "I’ll help you."
+    lo "I’ll walk with you to the station, and we can meet before class on the roof every day."
+    show loPic smile
+    lo "We can review what you learned from the class, and what you learned from me."
+    "You perk up a bit, and can’t help but smile back at [loName!s]."
+    mc "You know… I think I’d really like that."
+    lo "Awesome, let’s go then!"
+    "[loName!s] takes your hand and pulls you out of the room excitedly."
+
+    scene outside with fade
+    "The two of you exit the school, and you’re left holding hands, staring up at the starry night sky."
+    show loPic talk with dissolve
+    "[loName!s] tugs your sleeve and signs with one hand."
+    "Your eyes light up as you remember the sign from the class."
+    with None
+    show loPic smile at left
+    show sign pretty at truecenter
+    with dissolve
+    lo "Pretty."
+    with None
+    hide sign pretty
+    show loPic default at center
+    with dissolve
+    "You smirk a bit, and pull your phone out of your pocket to respond."
+    mc "Me, or the sky?"
+    show loPic smile
+    "[loName!s] smiles sweetly and looks into your eyes."
+    "[pronoun1cap!s] lets go of your hand, and signs,"
+    with None
+    show loPic smile at left
+    show sign both at truecenter
+    with dissolve
+    "Both."
+    with None
+    hide loPic
+    hide sign
+    with dissolve
+    "You started it, but you can’t help but blush."
+    "You quickly turn to your phone to hide your reddening cheeks."
+    label slAnswer2:
+        hide loPic with dissolve
+        mc "I remembered those signs!{nw}" #https://www.renpy.org/doc/html/text.html#text-displayables
+        mc "I remembered those signs!{fast} Pretty,"
+        menu:
+            "{image=sign both}":
+                $ answer = "0"
+            "{image=sign pretty}":
+                $answer = "1"
+        "and both!"
+        menu:
+            "{image=sign both}":
+                $ answer = answer + "1"
+            "{image=sign pretty}":
+                $answer = answer + "0"
+        show loPic talk
+
+    if answer=="11":
+        lo "You did! See, you'll pick it up in no time."
+    else:
+        lo "Not quite. But that's ok! Just keep trying your best and you'll get it soon."
+        jump slAnswer2
+    show loPic default
+    "Maybe [loName!s] is right. You feel reassured knowing that [pronoun1!s] has your back."
+
+    "Seemingly all too soon, you’ve reached the station."
+    show loPic talk
+    lo "Well, it seems this is where we part ways."
+    "You snicker a bit, and roll your eyes exaggeratedly."
+    mc "So dramatic."
+    show loPic smile
+    lo "I’ll see you on the roof before next class though, right?"
+    "You smile, and nod."
+    hide loPic with fade
+    "As [loName!s]'s train pulls in, you put your phone back in your pocket, and wave goodnight."
+
+    scene roof with fade
+    "The next night comes, and you climb the stairs to the roof."
+    show loPic default with dissolve
+    "[loName!s] is there waiting for you."
+    "[pronoun1cap!s] waves you over and pats the ground next to [pronoun0!s]."
+    "[pronoun1cap!s] pulls out [pronoun2!s] phone."
+    show loPic talk
+    lo "Come join me!"
+    "You go sit beside [loName!s], on the blanket [pronoun1!s] so graciously prepared for you."
+    lo "So, do you remember what you learned last time?"
+    mc "I sure do!"
+
+    label slAnswer3:
+        show loPic talk at left
+        lo "Alright, I'll test you then!"
+        $ score = 0
+
+        show sign yesPlease
+        $ answer = renpy.input("Enter the word")
+        if answer == "yes please":
+            $ score = score + 1
+        show sign now
+        $ answer = renpy.input("Enter the word")
+        if answer == "now":
+            $ score = score + 1
+        show sign sit at truecenter
+        $ answer = renpy.input("Enter the word")
+        if answer == "sit":
+            $ score = score + 1
+        show sign both
+        $ answer = renpy.input("Enter the word")
+        if answer == "both":
+            $ score = score + 1
+        show sign anyone
+        $ answer = renpy.input("Enter the word")
+        if answer == "anyone":
+            $ score = score + 1
+        show sign pretty
+        $ answer = renpy.input("Enter the word")
+        if answer == "pretty":
+            $ score = score + 1
+        show sign here
+        $ answer = renpy.input("Enter the word")
+        if answer == "here":
+            $ score = score + 1
+        show sign noThanks
+        $ answer = renpy.input("Enter the word")
+        if answer == "no thanks":
+            $ score = score + 1
+
+    with None
+    hide sign
+    show loPic talk at center
+    with dissolve
+    if score == 8:
+        lo "Whoo! Awesome job!"
+    elif score > 5:
+        lo "You only missed a few. Don't worry, you've got this!"
+        jump slAnswer3
+    elif score > 1:
+        lo "You missed some of them. You'll get it soon, I believe in you!"
+        jump slAnswer3
+    else:
+        lo "Ah. You got all them wrong. That's ok! I'll help you practice."
+        jump slAnswer3
 
 return #game end
 
