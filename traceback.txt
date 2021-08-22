@@ -1,53 +1,36 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-Compiling ATL code at game/script.rpy:20
-  File "game/script.rpy", line 56, in script
-    menu select_lo: #https://www.renpy.org/wiki/renpy/doc/cookbook/Letting_players_choose_their_own_name
-NameError: name 'charZoom' is not defined
+While running game code:
+  File "renpy/common/00keymap.rpy", line 469, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 469, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 488, in _execute_python_hide
+    renpy.save("_reload-1", "reload save game")
+PicklingError: Can't pickle <class 'store.director.AddStatement'>: it's not the same object as store.director.AddStatement
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 56, in script
-    menu select_lo: #https://www.renpy.org/wiki/renpy/doc/cookbook/Letting_players_choose_their_own_name
-  File "renpy/ast.py", line 1683, in execute
-    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
-  File "renpy/exports.py", line 1062, in menu
-    rv = renpy.store.menu(new_items)
-  File "renpy/exports.py", line 1298, in display_menu
-    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
-  File "renpy/ui.py", line 298, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-  File "renpy/display/core.py", line 3276, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "renpy/display/core.py", line 3694, in interact_core
-    root_widget.visit_all(lambda i : i.per_interact())
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 568, in visit_all
-    d.visit_all(callback, seen)
-  File "renpy/display/core.py", line 558, in visit_all
-    for d in self.visit():
-  File "renpy/atl.py", line 603, in visit
-    block = self.compile()
-  File "renpy/atl.py", line 510, in compile
-    block = self.atl.compile(self.context)
-  File "renpy/atl.py", line 705, in compile
-    statements = [ i.compile(ctx) for i in self.statements ]
-  File "renpy/atl.py", line 953, in compile
-    value = ctx.eval(expr)
-  File "renpy/atl.py", line 260, in eval
-    return eval(expr, renpy.store.__dict__, self.context) # @UndefinedVariable
-  File "<string>", line 1, in <module>
-NameError: name 'charZoom' is not defined
+  File "renpy/common/00keymap.rpy", line 469, in script
+    python hide:
+  File "renpy/ast.py", line 923, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "renpy/python.py", line 2235, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/00keymap.rpy", line 469, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 488, in _execute_python_hide
+    renpy.save("_reload-1", "reload save game")
+  File "renpy/loadsave.py", line 415, in save
+    reraise(t, e, tb)
+  File "renpy/loadsave.py", line 401, in save
+    dump((roots, renpy.game.log), logf)
+  File "renpy/loadsave.py", line 49, in dump
+    cPickle.dump(o, f, cPickle.HIGHEST_PROTOCOL)
+PicklingError: Can't pickle <class 'store.director.AddStatement'>: it's not the same object as store.director.AddStatement
 
 Windows-10-10.0.19041
 Ren'Py 7.4.8.1895
 Signs of Love 1.0
-Sat Aug 21 22:09:36 2021
+Sun Aug 22 02:58:02 2021

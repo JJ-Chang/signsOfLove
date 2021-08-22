@@ -1432,6 +1432,17 @@ screen quick_menu():
             textbutton _("Auto") action Preference("auto-forward", "toggle")
             textbutton _("Menu") action ShowMenu()
 
+# screen slImagemap0: #https://www.renpy.org/doc/html/screens.html?highlight=imagemap#add
+#     imagemap: #https://lemmasoft.renai.us/forums/viewtopic.php?f=51&t=9812
+#         ground classroom
+#         # hover?
+#
+#         hotspot (600, 360, 213, 311) selected Return("anyone")
+#         hotspot (860, 360, 317, 178) selected Return("here")
+#         hotspot (600, 710, 403, 270) selected Return("sit")
+#         hotspot (860, 710, 245, 255) selected Return("now")
+#
+#     add "sign anyone" xanchor 600 yanchor 360
 
 style window:
     variant "small"

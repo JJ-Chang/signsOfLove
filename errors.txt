@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 139: end of line expected.
-    show sign now at truecenter right 
-                                ^
+File "game/script.rpy", line 258: Line is indented, but the preceding one-line python statement statement does not expect a block. Please check this line's indentation.
+    $ score = score + "1"
+    ^
 
 Ren'Py Version: Ren'Py 7.4.8.1895
-Sat Aug 21 22:01:05 2021
+Sun Aug 22 02:49:12 2021
